@@ -84,13 +84,34 @@ class Solution:
                     break
         return nums
 
+    def rotate5(self, nums, k):
+        '''数组反转:
+            eg:
+            nums = [1, 2, 3, 4, 5, 6, 7]; k = 3
+            1.全部反转 [7, 6, 5, 4, 3, 2, 1]
+            2.reverse(nums, 0, k-1) : [5, 6, 7, 4, 3, 2, 1]
+            3.reverse(nums, k, len(nums)): [5, 6, 7, 1, 2, 3, 4]
+        '''
+        def reverse(nums:list, start:int, end:int):
+            while start < end:
+                nums[start], nums[end] = nums[end], nums[start]
+                start, end = start+1, end-1
+            pass
+        n = len(nums)
+        k %= n
+        reverse(nums, 0, n-1)       # 全部反转
+        reverse(nums, 0, k-1)
+        reverse(nums, k, n-1)
+        pass
+
 
 
 s = Solution()
 nums = [1,2,3,4,5,6,7]
-s.rotate4(nums, 3)
+s.rotate5(nums, 3)
 print(nums)
 
 # my_list = []
 # my_list.insert(0, 10)
 # print(my_list)
+
