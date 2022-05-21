@@ -34,7 +34,7 @@ class Solution:
         pass
 
     def rotate3(self, nums: list, k: int):
-        '''
+        ''' 环形替换：
             思路：不定义新数组，在原数组的基础上实现
                 1.开始 i = 0, 定义 temp = nums[0], new_index = (i + k) mod n
                 2.重复步骤1，遍历 1圈回到 nums[0], 之后 i = 1,继续重复 步骤1
@@ -66,11 +66,29 @@ class Solution:
                     break
         return nums
 
+    def rotate4(self, nums, k):
+        """环形替换：循环次数使用 cnt 记录 元素个数，cnt == n 时结束循环"""
+        n = len(nums)
+        current = start = 0
+        cnt = 0                 # 记录交换的元素总个数
+        while cnt < n:          # 使用 cnt 判断 元素是否交换完
+            temp = nums[current]
+            while True:
+                new_index = (current + k) % n
+                temp, nums[new_index] = nums[new_index], temp
+                current = new_index
+                cnt += 1
+                if current == start:
+                    current += 1
+                    start += 1
+                    break
+        return nums
+
 
 
 s = Solution()
-nums = [1, 2, 3, 4, 5, 6, 7]
-s.rotate3(nums, 3)
+nums = [1,2,3,4,5,6,7]
+s.rotate4(nums, 3)
 print(nums)
 
 # my_list = []
