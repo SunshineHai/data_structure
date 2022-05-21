@@ -12,7 +12,7 @@ class Solution:
                 向右轮转 1 步: [99,-1,-100,3]
                 向右轮转 2 步: [3,99,-1,-100]
             思路：
-                直接调用 list 中的 方法，执行时间有点长
+                直接调用 list 中的 方法，执行时间有点长，时间复杂度：O(n), 空间复杂度：O(n)
         """
         for i in range(k):
             nums.insert(0, nums.pop())
@@ -33,10 +33,44 @@ class Solution:
             nums[i] = new_list[i]
         pass
 
+    def rotate3(self, nums: list, k: int):
+        '''
+            思路：不定义新数组，在原数组的基础上实现
+                1.开始 i = 0, 定义 temp = nums[0], new_index = (i + k) mod n
+                2.重复步骤1，遍历 1圈回到 nums[0], 之后 i = 1,继续重复 步骤1
+                3.循环 gcd(n, k) 次(证明较麻烦，先记住，或者使用count记录每次遍历的元素个数，count == n时 结束)
+            时间复杂度：
+            空间复杂度：O(1)
+        '''
+        def gcd(m, n):
+            '''求最大公约数'''
+            if m < n:
+                m, n = n, m
+            while(n != 0):
+                r = m%n
+                m = n
+                n = r
+            return m
+            pass
+        n = len(nums)  # 数组长度
+        k = k % n
+        cnt = gcd(n, k)
+        for i in range(cnt):
+            current = i         # 需要新定义一个变量
+            temp = nums[current]
+            while True:
+                new_index = (current + k) % n
+                temp, nums[new_index] = nums[new_index], temp
+                current = new_index
+                if current == i:      # 相当于是do...while循环，先执行一次，再判断
+                    break
+        return nums
+
+
 
 s = Solution()
-nums = [1,2,3,4,5,6,7]
-s.rotate2(nums, 3)
+nums = [1, 2, 3, 4, 5, 6, 7]
+s.rotate3(nums, 3)
 print(nums)
 
 # my_list = []
