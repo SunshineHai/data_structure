@@ -34,7 +34,7 @@ class Solution:
         pass
 
     def rotate3(self, nums: list, k: int):
-        ''' 环形替换：
+        ''' 环形替换（重点掌握）：
             思路：不定义新数组，在原数组的基础上实现
                 1.开始 i = 0, 定义 temp = nums[0], new_index = (i + k) mod n
                 2.重复步骤1，遍历 1圈回到 nums[0], 之后 i = 1,继续重复 步骤1
