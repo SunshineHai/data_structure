@@ -72,7 +72,7 @@ class Solution:
 
     def productExceptSelf3(self, nums: list):
         '''
-            左右乘积列表法：时间复杂度 O(n), 空间复杂度 O(n)
+            左右乘积列表法：时间复杂度 O(n), 空间复杂度 O(n)   (重点掌握)
                 该方法依然和上一个方法一样，目的是使 代码 更加简洁。
         '''
         n = len(nums)
